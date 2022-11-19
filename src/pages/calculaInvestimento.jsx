@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react'
 import { ContentContainer } from "../components";
-import Aplicacao from "../utils/calcularAplicacao";
+import Investimento from '../utils/calculaInvestimento';
 import {
     Box,
     TextField,
@@ -26,12 +26,13 @@ import {
     PriceCheck
 } from '@mui/icons-material'
 
-export default function CalculaAplicacao() {
+
+export default function CalculaInvestimento() {
 
     const [calcData, setCalcData] = useState([])
 
     const [inputData, setInputData] = useState({
-        aplicacaoMensal: '',
+        capital: '',
         taxa: '',
         tipoTaxa: 'a.m',
         periodo: '',
@@ -46,8 +47,8 @@ export default function CalculaAplicacao() {
     }
 
     function calc() {
-        setCalcData(Aplicacao(
-            inputData.aplicacaoMensal,
+        setCalcData(Investimento(
+            inputData.capital,
             inputData.taxa,
             inputData.tipoTaxa,
             inputData.periodo,
@@ -57,38 +58,38 @@ export default function CalculaAplicacao() {
 
     return (
         <ContentContainer>
-            <h1>Calcular aplicação</h1>
-            <p>Calcula uma aplicação recorrente linear a juros compostos</p>
+            <h1>Calcular investimento</h1>
+            <p>Calcula investimento a juros compostos</p>
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container>
-
-                    <Grid xs={4}>
+                <Grid container spacing={0}>
+                    <Grid xs={2}>
                         <TextField
-                            label="Aplicação mensal"
-                            name="aplicacaoMensal"
-                            value={inputData.aplicacaoMensal}
+                            label="Valor aplicado"
+                            name="capital"
                             onChange={handleChange}
+                            value={inputData.capital}
+                            variant="outlined"
+                            type="number"
                             fullWidth
                             InputProps={{
                                 endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
                             }}
                         />
                     </Grid>
-
                     <Grid xs={2}>
                         <TextField
                             label="Taxa"
                             name="taxa"
-                            type="number"
                             value={inputData.taxa}
                             onChange={handleChange}
+                            variant="outlined"
+                            type="number"
                             fullWidth
                             InputProps={{
                                 endAdornment: <InputAdornment position="end"><Percent /></InputAdornment>
                             }}
                         />
                     </Grid>
-
                     <Grid xs={2}>
                         <FormControl fullWidth>
                             <InputLabel id="tipo-taxa">Ao Mes / Ao Ano</InputLabel>
@@ -105,13 +106,13 @@ export default function CalculaAplicacao() {
                             </Select>
                         </FormControl>
                     </Grid>
-
                     <Grid xs={2}>
                         <TextField
                             label="Periodo"
                             name="periodo"
                             value={inputData.periodo}
                             onChange={handleChange}
+                            variant="outlined"
                             type="number"
                             fullWidth
                             InputProps={{
@@ -137,46 +138,50 @@ export default function CalculaAplicacao() {
                         </FormControl>
                     </Grid>
 
-                    <Grid xs={12}>
-                        <Button onClick={calc} variant='contained' fullWidth style={{ margin: '20px 0 20px 0', height: '55px' }} endIcon={<PriceCheck />}>Calcular</Button>
+                    <Grid xs={2}>
+                        <Button onClick={calc} fullWidth variant="contained" size="large" endIcon={<PriceCheck />} style={{ height: '55px' }}>
+                            Calcular
+                        </Button>
                     </Grid>
-
-                    {
-                        calcData.length > 0 && <h1>Montante obtido: <span style={{ color: '#197dff', textDecoration: 'underline' }}>$ {calcData[calcData.length - 1].montante.toFixed(2)}</span></h1>
-                    }
-
-                    {
-                        calcData.length > 0 &&
-
-                        <TableContainer component={Paper} style={{ marginTop: '30px' }}>
-                            <Table sx={{ minWidth: 650 }}>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Mes</TableCell>
-                                        <TableCell>Capital</TableCell>
-                                        <TableCell>Juros</TableCell>
-                                        <TableCell>Montante</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {
-                                        calcData.map(element => (
-                                            <TableRow>
-                                                <TableCell>{element.mes}</TableCell>
-                                                <TableCell>{element.capital.toFixed(2)}</TableCell>
-                                                <TableCell>{element.juros.toFixed(2)}</TableCell>
-                                                <TableCell>{element.montante.toFixed(2)}</TableCell>
-                                            </TableRow>
-                                        ))
-                                    }
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-
-                    }
-
                 </Grid>
+
+                {
+                    calcData.length > 0 && <h1>Montante obtido: <span style={{ color: '#197dff', textDecoration: 'underline' }}>$ {calcData[calcData.length - 1].montante.toFixed(2)}</span></h1>
+                }
+
+                {
+                    calcData.length > 0 &&
+
+                    <TableContainer component={Paper} style={{ marginTop: '30px' }}>
+                        <Table sx={{ minWidth: 650 }}>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Mes</TableCell>
+                                    <TableCell>Capital</TableCell>
+                                    <TableCell>Juros</TableCell>
+                                    <TableCell>Montante</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    calcData.map(element => (
+                                        <TableRow>
+                                            <TableCell>{element.mes}</TableCell>
+                                            <TableCell>{element.capital.toFixed(2)}</TableCell>
+                                            <TableCell>{element.juros.toFixed(2)}</TableCell>
+                                            <TableCell>{element.montante.toFixed(2)}</TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                }
+
+
             </Box>
+
         </ContentContainer>
     )
 }
