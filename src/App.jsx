@@ -26,7 +26,6 @@ import {
 import {
   Home as HomeIcon,
   Savings,
-  AddCard,
   RequestQuote,
   CurrencyExchange,
   Payments,

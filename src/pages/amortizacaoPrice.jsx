@@ -2,15 +2,10 @@ import { useState } from "react";
 import { ContentContainer } from "../components";
 import { PRICE } from "../utils/calculaAmortizacao";
 import {
-    Box,
     TextField,
     InputAdornment,
     FormControl,
     Button,
-    Select,
-    InputLabel,
-    MenuItem,
-    Grid,
     Paper,
     TableContainer,
     Table,
@@ -22,7 +17,6 @@ import {
 import {
     AttachMoney,
     Percent,
-    AccessTime,
     PriceCheck,
     Money
 } from '@mui/icons-material'
@@ -57,90 +51,90 @@ export default function AmortizacaoPrice() {
         <ContentContainer>
             <h1>Calcular amortização PRICE</h1>
             <p>Calcula a amortização com valor de prestação constante</p>
+            <FormControl>
+                <TextField
+                    label="Saldo devedor"
+                    name="saldoDevedor"
+                    onChange={handleChange}
+                    fullWidth
+                    margin="dense"
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
+                    }}
+                />
 
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container>
-                    <Grid xs={6}>
-                        <TextField
-                            label="Saldo devedor"
-                            name="saldoDevedor"
-                            onChange={handleChange}
-                            fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
-                            }}
-                        />
-                    </Grid>
+                <TextField
+                    label="Total de parcelas"
+                    name="totalParcelas"
+                    onChange={handleChange}
+                    margin="dense"
+                    fullWidth
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><Money /></InputAdornment>
+                    }}
+                />
 
-                    <Grid xs={2}>
-                        <TextField
-                            label="Total de parcelas"
-                            name="totalParcelas"
-                            onChange={handleChange}
-                            fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end"><Money /></InputAdornment>
-                            }}
-                        />
-                    </Grid>
+                <TextField
+                    label="Taxa de juros"
+                    name="taxa"
+                    onChange={handleChange}
+                    margin="dense"
+                    fullWidth
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><Percent /></InputAdornment>
+                    }}
+                />
 
-                    <Grid xs={2}>
-                        <TextField
-                            label="Taxa de juros"
-                            name="taxa"
-                            onChange={handleChange}
-                            fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end"><Percent /></InputAdornment>
-                            }}
-                        />
-                    </Grid>
+                <Button
+                    onClick={calc}
+                    variant='contained'
+                    fullWidth
+                    style={{ height: '55px', marginTop: '20px' }}
+                    endIcon={<PriceCheck />}
+                >
+                    Calcular
+                </Button>
 
-                    <Grid xs={2}>
-                        <Button onClick={calc} variant='contained' fullWidth style={{ height: '55px' }} endIcon={<PriceCheck />}>Calcular</Button>
-                    </Grid>
+            </FormControl>
 
-                    {
-                        calcData.length > 0 &&
+            {
+                calcData.length > 0 &&
 
-                        <TableContainer component={Paper} style={{ marginTop: '30px' }}>
-                            <Table sx={{ minWidth: 650 }}>
-                                <TableHead>
+                <TableContainer component={Paper} style={{ marginTop: '30px' }}>
+                    <Table sx={{ minWidth: 650 }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Mes</TableCell>
+                                <TableCell>Prestação</TableCell>
+                                <TableCell>Juros</TableCell>
+                                <TableCell>Amortização</TableCell>
+                                <TableCell>Saldo devedor</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>0</TableCell>
+                                <TableCell>-</TableCell>
+                                <TableCell>-</TableCell>
+                                <TableCell>-</TableCell>
+                                <TableCell>{(calcData[0].saldoDevedor + calcData[0].amortizacao).toFixed(2)}</TableCell>
+                            </TableRow>
+                            {
+                                calcData.map(element => (
                                     <TableRow>
-                                        <TableCell>Mes</TableCell>
-                                        <TableCell>Prestação</TableCell>
-                                        <TableCell>Juros</TableCell>
-                                        <TableCell>Amortização</TableCell>
-                                        <TableCell>Saldo devedor</TableCell>
+                                        <TableCell>{element.mes}</TableCell>
+                                        <TableCell>{element.prestacao.toFixed(2)}</TableCell>
+                                        <TableCell>{element.juro.toFixed(2)}</TableCell>
+                                        <TableCell>{element.amortizacao.toFixed(2)}</TableCell>
+                                        <TableCell>{element.saldoDevedor.toFixed(2)}</TableCell>
                                     </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell>0</TableCell>
-                                        <TableCell>-</TableCell>
-                                        <TableCell>-</TableCell>
-                                        <TableCell>-</TableCell>
-                                        <TableCell>{(calcData[0].saldoDevedor + calcData[0].amortizacao).toFixed(2)}</TableCell>
-                                    </TableRow>
-                                    {
-                                        calcData.map(element => (
-                                            <TableRow>
-                                                <TableCell>{element.mes}</TableCell>
-                                                <TableCell>{element.prestacao.toFixed(2)}</TableCell>
-                                                <TableCell>{element.juro.toFixed(2)}</TableCell>
-                                                <TableCell>{element.amortizacao.toFixed(2)}</TableCell>
-                                                <TableCell>{element.saldoDevedor.toFixed(2)}</TableCell>
-                                            </TableRow>
-                                        ))
-                                    }
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
-                    }
-
-                </Grid>
-            </Box>
+            }
         </ContentContainer>
     )
 }

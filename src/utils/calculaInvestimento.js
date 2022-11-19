@@ -1,4 +1,4 @@
-export default function Investimento(capital, taxa, tipoTaxa, periodo, tipoPeriodo) {
+export default function Investimento(capital, taxa, tipoTaxa='a.m', periodo, tipoPeriodo='meses') {
 
     if (tipoTaxa == 'a.a' && tipoPeriodo == 'meses') periodo = periodo / 12;
     if (tipoTaxa == 'a.m' && tipoPeriodo == 'anos') periodo = periodo * 12;

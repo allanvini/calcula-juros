@@ -1,4 +1,4 @@
-export default function Aplicacao(aplicacaoMensal, taxa, tipoTaxa, periodo, tipoPeriodo) {
+export default function Aplicacao(aplicacaoMensal, taxa, tipoTaxa="a.a", periodo, tipoPeriodo="meses") {
 
     if (tipoTaxa == 'a.a' && tipoPeriodo == 'meses') periodo = periodo / 12;
     if (tipoTaxa == 'a.m' && tipoPeriodo == 'anos') periodo = periodo * 12;

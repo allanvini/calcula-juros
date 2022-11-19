@@ -1,29 +1,16 @@
 import { useState } from "react";
 import { DescobreParametro } from "../utils/calculaParametro";
 import {
-    Box,
     TextField,
     InputAdornment,
     FormControl,
     Button,
-    Select,
-    InputLabel,
-    MenuItem,
-    Grid,
-    Paper,
-    TableContainer,
-    Table,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell
 } from '@mui/material'
 import {
     AttachMoney,
     Percent,
     AccessTime,
     PriceCheck,
-    Money
 } from '@mui/icons-material'
 import { ContentContainer } from "../components";
 
@@ -100,7 +87,7 @@ export default function EncontraParametro() {
                 <Button
                     onClick={calc}
                     variant='contained'
-                    style={{ height: '55px' }}
+                    style={{ height: '55px', marginTop: '20px' }}
                     endIcon={<PriceCheck />}
                 >
                     Calcular
