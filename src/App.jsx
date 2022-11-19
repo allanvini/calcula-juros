@@ -5,25 +5,45 @@ import {
   Link as RouterLink
 } from 'react-router-dom';
 
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button'
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField'
+import {
+  NavBar
+} from './components';
+
+import {
+  Typography,
+  Button
+} from '@mui/material'
+
+import {
+  Home,
+  CalculaAplicacao
+} from './pages';
+
+import {
+  Home as HomeIcon,
+  Savings,
+  AddCard,
+  RequestQuote
+} from '@mui/icons-material'
 
 function App() {
   return (
     <Typography>
       <Router>
 
-        <Button component={RouterLink} to='/'>Home</Button>
-        <Button component={RouterLink} to='/teste'>Teste</Button>
-        <Link component={RouterLink}>Link comum</Link>
+        <NavBar>
+          <Button component={RouterLink} to='/' startIcon={<HomeIcon />} size="large">Pagina inicial</Button>
+          <Button component={RouterLink} to='/aplicacao' startIcon={<Savings />} size="large">Calcular aplicação</Button>
+          <Button component={RouterLink} to='/financiamento' startIcon={<AddCard />} size="large">Calcular financiamento</Button>
+          <Button component={RouterLink} to='/quitacao' startIcon={<RequestQuote />} size="large">Quitar financiamento</Button>
+        </NavBar>
+
 
         <Routes>
-          <Route path="" exact element={<Button variant='contained'>Hello World!</Button>} />
-          <Route path="/teste" exact element={<h1>pagina teste</h1>} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/aplicacao" exact element={<CalculaAplicacao />} />
         </Routes>
-        <TextField label="Insira algo" variant="standard" />
+
       </Router>
     </Typography>
   )
