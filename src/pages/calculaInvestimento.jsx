@@ -57,7 +57,7 @@ export default function CalculaInvestimento() {
     return (
         <ContentContainer>
             <h1>Calcular investimento</h1>
-            <p>Calcula o montante obtido de um investimento a juros compostos por um determinado período</p>
+            <p>Calcula o montante obtido de um investimento simples (sem aportes regulares) a juros compostos por um determinado período</p>
             <FormControl>
                 <TextField
                     label="Valor aplicado"
