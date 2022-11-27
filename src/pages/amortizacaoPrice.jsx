@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ContentContainer } from "../components";
 import { PRICE } from "../utils/calculaAmortizacao";
 import { PeriodoAmortizacao } from "../utils/filtros";
+import { paginacao } from "../utils/paginacao";
 import {
     TextField,
     InputAdornment,
@@ -13,7 +14,8 @@ import {
     TableHead,
     TableBody,
     TableRow,
-    TableCell
+    TableCell,
+    TablePagination
 } from '@mui/material'
 import {
     AttachMoney,
@@ -27,6 +29,11 @@ import {
 export default function AmortizacaoPrice() {
 
     const [calcData, setCalcData] = useState([])
+
+    const [paginationControls, setPaginationControls] = useState({
+        itemsPerPage: 10,
+        page: 1
+    })
 
     const [inputData, setInputData] = useState({
         saldoDevedor: '',
@@ -186,15 +193,17 @@ export default function AmortizacaoPrice() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell>0</TableCell>
-                                    <TableCell>-</TableCell>
-                                    <TableCell>-</TableCell>
-                                    <TableCell>-</TableCell>
-                                    <TableCell>{(calcData[0].saldoDevedor + calcData[0].amortizacao).toFixed(2)}</TableCell>
-                                </TableRow>
+                                {paginationControls.page == 1 &&
+                                    <TableRow>
+                                        <TableCell>0</TableCell>
+                                        <TableCell>-</TableCell>
+                                        <TableCell>-</TableCell>
+                                        <TableCell>-</TableCell>
+                                        <TableCell>{(calcData[0].saldoDevedor + calcData[0].amortizacao).toFixed(2)}</TableCell>
+                                    </TableRow>
+                                }
                                 {
-                                    calcData.map(element => (
+                                    paginacao(calcData, paginationControls.itemsPerPage, paginationControls.page).map(element => (
                                         <TableRow>
                                             <TableCell>{element.mes}</TableCell>
                                             <TableCell>{element.prestacao.toFixed(2)}</TableCell>
@@ -206,7 +215,29 @@ export default function AmortizacaoPrice() {
                                 }
                             </TableBody>
                         </Table>
+
+                        <TablePagination
+                            count={calcData.length}
+                            page={paginationControls.page - 1}
+                            rowsPerPage={paginationControls.itemsPerPage}
+                            shape="rounded"
+                            component="div"
+                            onPageChange={(event, newPage) => {
+                                setPaginationControls({
+                                    ...paginationControls,
+                                    page: newPage + 1
+                                })
+                            }}
+                            onRowsPerPageChange={(event) => {
+                                setPaginationControls({
+                                    ...paginationControls,
+                                    itemsPerPage: parseInt(event.target.value, 10)
+                                })
+                            }}
+                        />
+
                     </TableContainer>
+
                 </>
             }
         </ContentContainer>
