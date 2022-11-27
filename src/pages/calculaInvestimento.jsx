@@ -153,7 +153,7 @@ export default function CalculaInvestimento() {
                     <Table sx={{ minWidth: 650 }}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>{inputData.tipoPeriodo == 'meses' ? 'Mes' : 'Ano'}</TableCell>
+                                <TableCell>{inputData.tipoTaxa == 'meses' ? 'Mes' : 'Ano'}</TableCell>
                                 <TableCell>Capital</TableCell>
                                 <TableCell>Juros</TableCell>
                                 <TableCell>Montante</TableCell>
