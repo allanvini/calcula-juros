@@ -74,6 +74,7 @@ export default function AmortizacalSac() {
                     name="saldoDevedor"
                     onChange={handleChange}
                     margin='dense'
+                    type="number"
                     fullWidth
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
@@ -85,6 +86,7 @@ export default function AmortizacalSac() {
                     name="totalParcelas"
                     onChange={handleChange}
                     margin='dense'
+                    type="number"
                     fullWidth
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><Money /></InputAdornment>
@@ -96,6 +98,7 @@ export default function AmortizacalSac() {
                     name="taxa"
                     onChange={handleChange}
                     margin='dense'
+                    type="number"
                     fullWidth
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><Percent /></InputAdornment>
@@ -103,8 +106,10 @@ export default function AmortizacalSac() {
                 />
 
                 <Button
+                type="submit"
                     onClick={calc}
                     variant='contained'
+                    onSubmit={(event)=>{event.preventDefault(); calc()}}
                     fullWidth
                     style={{ height: '55px', marginTop: '20px' }}
                     endIcon={<PriceCheck />}
@@ -127,7 +132,7 @@ export default function AmortizacalSac() {
                             name="de"
                             type="number"
                             min={1}
-                            style={{ margin: '0 8px 0 8px' }}
+                            style={{ margin: '0 4px 0 0' }}
                             InputProps={{
                                 endAdornment: <InputAdornment position="end"><CalendarMonth /></InputAdornment>
                             }}
@@ -139,7 +144,7 @@ export default function AmortizacalSac() {
                             name="ate"
                             type="number"
                             max={calcData.length}
-                            style={{ margin: '0 8px 0 8px' }}
+                            style={{ margin: '0 4px 0 0' }}
                             InputProps={{
                                 endAdornment: <InputAdornment position="end"><CalendarMonth /></InputAdornment>
                             }}
@@ -149,9 +154,8 @@ export default function AmortizacalSac() {
                         <Button
                             variant='contained'
                             style={{ margin: '0 8px 0 8px' }}
-                            endIcon={<FilterAlt />}
                             onClick={handleFilter}
-                        >Filtrar</Button>
+                        ><FilterAlt /></Button>
                     </FormControl>
 
                     {

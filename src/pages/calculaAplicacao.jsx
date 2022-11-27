@@ -63,6 +63,7 @@ export default function CalculaAplicacao() {
                     label="Aplicação mensal"
                     name="aplicacaoMensal"
                     margin="dense"
+                    type="number"
                     value={inputData.aplicacaoMensal}
                     onChange={handleChange}
                     fullWidth
@@ -90,7 +91,6 @@ export default function CalculaAplicacao() {
                         labelId="tipo-taxa"
                         label="Ao Mes / Ao Ano"
                         name="tipoTaxa"
-                        
                         value={inputData.tipoTaxa}
                         onChange={handleChange}
                         fullWidth
