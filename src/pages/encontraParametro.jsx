@@ -50,26 +50,29 @@ export default function EncontraParametro() {
                     onChange={handleChange}
                     value={inputData.capital}
                     margin="dense"
+                    type="number"
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
                     }}
                 />
                 <TextField
-                    label="Tempo"
+                    label="Tempo (meses)"
                     name="tempo"
                     onChange={handleChange}
                     value={inputData.tempo}
                     margin="dense"
+                    type="number"
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><AccessTime /></InputAdornment>
                     }}
                 />
                 <TextField
-                    label="Taxa"
+                    label="Taxa (a.m)"
                     name="taxa"
                     onChange={handleChange}
                     value={inputData.taxa}
                     margin="dense"
+                    type="number"
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><Percent /></InputAdornment>
                     }}
@@ -80,6 +83,7 @@ export default function EncontraParametro() {
                     onChange={handleChange}
                     value={inputData.montante}
                     margin="dense"
+                    type="number"
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><AttachMoney /></InputAdornment>
                     }}

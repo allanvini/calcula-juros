@@ -168,6 +168,7 @@ export default function AmortizacalSac() {
                                             <TableCell>Total pago em prestações</TableCell>
                                             <TableCell>Total de juros pago</TableCell>
                                             <TableCell>Total de amortização acumulada</TableCell>
+                                            <TableCell>Saldo devedor no ultimo período</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -175,6 +176,7 @@ export default function AmortizacalSac() {
                                             <TableCell>{filterResults.prestacoes.toFixed(2)}</TableCell>
                                             <TableCell>{filterResults.juros.toFixed(2)}</TableCell>
                                             <TableCell>{filterResults.amortizacao.toFixed(2)}</TableCell>
+                                            <TableCell>{filterResults.saldoDevedor.toFixed(2)}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
